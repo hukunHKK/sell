@@ -44,10 +44,6 @@ export default {
   },
   created(){
     this.classMap = ['decrease','discount','special','invoice_1','guarantee']
-    setTimeout(() => {
-    console.log(this.seller)
-      
-    }, 1000);
   }
 }
 </script>
