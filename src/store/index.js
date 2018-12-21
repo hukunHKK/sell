@@ -2,12 +2,17 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 Vue.use(Vuex)
 const state = {
-  msg:'11'
+  msg:'11',
+  flag:false,
+  foods:[]
 }
 const mutations = {
-  setMsg(state,msg){
-    state.msg = msg + '-root';
-    console.log('root')
+  setFoods(state, foods) {
+    console.log(foods)
+    state.foods = foods
+  },
+  setFlag(state,flag){
+    state.flag = flag
   }
 }
 const actions = {

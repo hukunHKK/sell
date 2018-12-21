@@ -7,7 +7,6 @@ import store from './store'
 import '../mock/mock'
 
 Vue.config.productionTip = false
-
 /* eslint-disable no-new */
 let v = new Vue({
   el: '#app',

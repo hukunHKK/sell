@@ -13,22 +13,26 @@
         <router-link to='sellers'>商家</router-link>
       </div>
     </div>
-    <router-view></router-view>
+    <router-view :seller='seller'></router-view>
+    <shopcart :deliveryPrice='seller.deliveryPrice' :minPrice='seller.minPrice'></shopcart>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
 import header from './components/header'
+import shopcart from './components/shopcart'
+
 export default {
   name: 'App',
   components:{
-    'v-header':header
+    'v-header':header,
+    'shopcart':shopcart
   },
   data(){
     return {
       seller:{},
-      isActive:[true,false,false]
+      isActive:[true,false,false],
     }
   },
   created(){
@@ -39,6 +43,8 @@ export default {
       this.isActive = [false,false,false];
       this.isActive[index] = true;
     }
+  },
+  computed:{
   }
 }
 

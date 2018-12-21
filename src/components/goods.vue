@@ -32,8 +32,8 @@
               </div>
               <div class="cart-control-wrapper">
                 <div class="num-wrapper">
-                  <span class="icon-remove_circle_outline"></span>
-                  <!-- <span class="num">{{}}</span> -->
+                  <!-- <cartcontrol @changeNum='changeNum(i.name,num)'></cartcontrol> -->
+                  <cartcontrol :food='i'></cartcontrol>
                 </div>
               </div>
             </li>
@@ -46,10 +46,14 @@
 
 <script>
 import {mapMutations, mapActions} from 'vuex'
+import cartControl from './cartControl'
 import axios from 'axios'
 import BScrool from 'better-scroll'
 export default {
-  name:'d',
+  props:['seller'],
+  components:{
+    cartcontrol:cartControl
+  },
   data(){
     return {
       goods:[],
@@ -76,7 +80,8 @@ export default {
         click:true
       })
       this.food = new BScrool(this.$refs.food,{
-        probeType:3
+        probeType:3,
+        click:true
       })
       this.food.on('scroll',pos=>{
         this.scrollY = Math.abs(Math.round(pos.y))
@@ -95,6 +100,9 @@ export default {
     selectItem(index,event){
       let el = this.foodItem[index]
       this.food.scrollToElement(el,300);
+    },
+    changeNum(num,q){
+      console.log(num,q)
     }
   },
   computed:{
@@ -117,19 +125,23 @@ export default {
   },
   mounted(){
     // this.initScroll()
+    
   },
   watch:{
-    // msg(){
-    //   console.log(arguments)
-    //   this.$store.commit('setMsg',this.msg,'1');
-    //   // this.$store.dispatch('setMsg',this.msg);
-    // }
-    // ...mapMutations('news',{
-    //   msg:'setMsg'
-    // }),
-    ...mapActions('news',{
-      msg:'setMsg'
-    })
+    goods:{
+      handler(){
+        let foods = []
+        this.goods.forEach(good=>{
+          good.foods.forEach(food=>{
+            if(food.count>0){
+              foods.push(food)
+            }
+          })
+        })
+        this.$store.commit('setFoods',foods);
+      },
+      deep:true
+    }
   }
 }
 </script>
@@ -200,6 +212,7 @@ export default {
             display flex
             padding 18px 0
             border-1px(rgba(7,17,27,0.1))
+            position relative
             img
               width 57px
               height 57px
@@ -246,6 +259,10 @@ export default {
             &:last-child
               &:after
                 width 0
+            .cart-control-wrapper{
+              position absolute
+              right 0
+            }
 
 
 

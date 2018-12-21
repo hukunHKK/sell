@@ -1,12 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
 import Header from '@/components/header'
 import err from '@/components/err'
 import Rating from '@/components/rating'
 import Goods from '@/components/goods'
 import Sellers from '@/components/sellers'
-import login from '@/components/login'
 import app from '@/App'
 Vue.use(Router)
 
